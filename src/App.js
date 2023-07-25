@@ -1,10 +1,22 @@
 import './App.css';
 
+import styled from 'styled-components';
+import tw from 'twin.macro';
+
+import Routes from './routes';
+
+const Container = styled.div`
+	${tw`
+  font-extrabold
+  text-3xl
+  `};
+`;
+
 function App() {
 	return (
-		<div className="App">
-			<h1>Online SQL Editor</h1>
-		</div>
+		<Container>
+			<Routes />
+		</Container>
 	);
 }
 
