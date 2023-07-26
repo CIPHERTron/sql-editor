@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import useData from 'hooks/useData';
 
-import { CircularProgress as Loader } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 
 import Table from './Table';
 
@@ -49,7 +49,9 @@ const TableContainer = React.memo(({ query, isOpen }) => {
 						<Table columns={columns} completeData={data} data={queryData} query={query} />
 					</>
 				) : (
-					<img src={Loader} className="w-20 mx-auto" alt="loader" />
+					<Box sx={{ width: '100%' }}>
+						<LinearProgress />
+					</Box>
 				)}
 			</section>
 		</>
