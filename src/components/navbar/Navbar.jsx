@@ -86,7 +86,7 @@ function Navbar({ query, setQuery, value }) {
 					</Drawer>
 				</Toolbar>
 			</AppBar>
-			<Snackbar anchorOrigin={{ horizontal, vertical }} open={open} autoHideDuration={6000} onClose={handleClose}>
+			<Snackbar anchorOrigin={{ horizontal, vertical }} open={open} autoHideDuration={2000} onClose={handleClose}>
 				<Alert onClose={handleClose} severity={showToast} sx={{ width: '100%' }}>
 					{toastMsg}
 				</Alert>

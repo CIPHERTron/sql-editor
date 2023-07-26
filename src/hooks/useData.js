@@ -20,12 +20,10 @@ const useData = (tableName) => {
 				setData(data);
 				setShowToast('success');
 				setToastMsg('Query ran successfully');
-				// toast.success('Query ran successfully');
 			})
 			.catch((e) => {
 				setShowToast('error');
 				setToastMsg(e.message);
-				// toast.error(e.message);
 			});
 	};
 
@@ -51,13 +49,11 @@ const useData = (tableName) => {
 					.catch((error) => {
 						setShowToast('error');
 						setToastMsg(error.message);
-						// toast.error(error.message);
 					});
 			} else {
 				setError(true);
 				setShowToast('error');
 				setToastMsg('Please enter a valid query');
-				// toast.error('Please enter a valid query');
 			}
 		};
 		let t0 = performance.now(); //start time
