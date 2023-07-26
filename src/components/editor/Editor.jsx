@@ -28,6 +28,7 @@ const Editor = ({ value, setValue, isOpen }) => {
 					maxLines={50}
 					width="100%"
 					showPrintMargin={false}
+					highlightActiveLine
 					showGutter
 					placeholder="Write your Query here..."
 					editorProps={{ $blockScrolling: true }}

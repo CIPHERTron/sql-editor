@@ -14,7 +14,7 @@ function Home() {
 
 	return (
 		<div>
-			<Navbar query={query} setQuery={setQuery} value={value} />
+			<Navbar query={query} setQuery={setQuery} value={value} setValue={setValue} />
 			<div className="grid grid-cols-layout-desktop grid-rows-layout-desktop min-h-screen">
 				<Suspense fallback={<Loader />}>
 					<Editor value={value} setValue={setValue} isOpen={isOpen} />

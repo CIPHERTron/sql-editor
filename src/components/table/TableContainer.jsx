@@ -18,6 +18,7 @@ const QueryTime = styled.div`
 	border-radius: 8px;
 	width: fit-content;
 	margin: 0 auto;
+	margin-top: 16px;
 `;
 
 const TableContainer = React.memo(({ query, isOpen }) => {
