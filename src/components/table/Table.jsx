@@ -56,7 +56,7 @@ const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) 
 	return (
 		<>
 			<Helmet>
-				<title>{`${count} Records found || React SQL Editor`}</title>
+				<title>{`SQL Editor`}</title>
 			</Helmet>
 			<label className="flex gap-x-2 items-baseline">
 				<span className="text-primary-dark hidden md:inline-block font-semibold">Search: </span>

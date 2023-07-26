@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 
-import { JoinFull, PlayCircle, TableChart } from '@mui/icons-material';
-import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
+import useData from 'hooks/useData';
 
-function Navbar({ setQuery, value }) {
+import { JoinFull, PlayCircle, TableChart } from '@mui/icons-material';
+import {
+	Alert as MuiAlert,
+	AppBar,
+	Box,
+	Button,
+	Drawer,
+	IconButton,
+	Snackbar,
+	Toolbar,
+	Typography,
+} from '@mui/material';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+function Navbar({ query, setQuery, value }) {
+	const { showToast, toastMsg } = useData(query);
+	const [open, setOpen] = React.useState(false);
 	const [state, setState] = useState({
 		right: false,
 	});
@@ -12,14 +30,28 @@ function Navbar({ setQuery, value }) {
 		if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 			return;
 		}
-
 		setState({ ...state, [anchor]: open });
 	};
 
 	const onSubmit = () => {
 		var Z = value.toLowerCase().slice(value.indexOf('from') + 'from'.length);
 		setQuery(Z.split(' ')[1]);
+
+		if (toastMsg !== '') {
+			setOpen(true);
+		}
 	};
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setOpen(false);
+	};
+
+	const horizontal = 'bottom';
+	const vertical = 'right';
 
 	const history = (anchor) => (
 		<Box
@@ -54,6 +86,11 @@ function Navbar({ setQuery, value }) {
 					</Drawer>
 				</Toolbar>
 			</AppBar>
+			<Snackbar anchorOrigin={{ horizontal, vertical }} open={open} autoHideDuration={6000} onClose={handleClose}>
+				<Alert onClose={handleClose} severity={showToast} sx={{ width: '100%' }}>
+					{toastMsg}
+				</Alert>
+			</Snackbar>
 		</Box>
 	);
 }

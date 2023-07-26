@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from 'react';
 
 import { Editor, Footer, Navbar, TableContainer } from 'components';
-import { Toaster } from 'react-hot-toast';
 
 import { CircularProgress as Loader } from '@mui/material';
 
@@ -12,34 +11,7 @@ function Home() {
 
 	return (
 		<div>
-			<Navbar setQuery={setQuery} value={value} />
-			<Toaster
-				position="top-center"
-				gutter={8}
-				containerClassName=""
-				containerStyle={{}}
-				toastOptions={{
-					className: '',
-					duration: 5000,
-					style: {
-						background: '#ffffff',
-						color: '#3A4374',
-					},
-					success: {
-						duration: 3000,
-						iconTheme: {
-							primary: '#4661E6',
-							secondary: '#ffffff',
-						},
-					},
-					error: {
-						iconTheme: {
-							primary: '#D73737',
-							secondary: '#ffffff',
-						},
-					},
-				}}
-			/>
+			<Navbar query={query} setQuery={setQuery} value={value} />
 			<div className="grid grid-cols-layout-desktop grid-rows-layout-desktop min-h-screen">
 				<Suspense fallback={<Loader />}>
 					<Editor value={value} setValue={setValue} isOpen={isOpen} />
