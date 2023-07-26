@@ -1,38 +1,32 @@
 import React from 'react';
 
-import {
-	KeyboardArrowLeft,
-	KeyboardArrowRight,
-	KeyboardDoubleArrowLeft,
-	KeyboardDoubleArrowRight,
-} from '@mui/icons-material';
-import { Container, FormControl, IconButton, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+import DataObjectIcon from '@mui/icons-material/DataObject';
+import { Container } from '@mui/material';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
 
 function Playground() {
 	return (
 		<Container>
-			<FormControl sx={{ m: 1, minWidth: 120 }}>
-				<InputLabel id="demo-simple-select-label">No. of rows per page</InputLabel>
-				<Select labelId="demo-simple-select-label" id="demo-simple-select" value={5} label="Age" onChange={() => {}}>
-					<MenuItem value={5}>5</MenuItem>
-					<MenuItem value={10}>10</MenuItem>
-					<MenuItem value={20}>20</MenuItem>
-				</Select>
-			</FormControl>
-			<Stack direction="row" justifyContent="center" alignItems="center">
-				<IconButton onClick={() => {}}>
-					<KeyboardDoubleArrowLeft />
-				</IconButton>
-				<IconButton onClick={() => {}}>
-					<KeyboardArrowLeft />
-				</IconButton>
-				<IconButton onClick={() => {}}>
-					<KeyboardArrowRight />
-				</IconButton>
-				<IconButton onClick={() => {}}>
-					<KeyboardDoubleArrowRight />
-				</IconButton>
-			</Stack>
+			<List
+				sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+				component="nav"
+				aria-labelledby="nested-list-subheader"
+				subheader={
+					<ListSubheader component="div" id="nested-list-subheader">
+						Queries History
+					</ListSubheader>
+				}>
+				<ListItemButton>
+					<ListItemIcon>
+						<DataObjectIcon />
+					</ListItemIcon>
+					<ListItemText primary="select * from customers" />
+				</ListItemButton>
+			</List>
 		</Container>
 	);
 }

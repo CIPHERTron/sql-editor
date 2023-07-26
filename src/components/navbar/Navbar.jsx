@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import useData from 'hooks/useData';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 import { JoinFull, PlayCircle, Storage, TableChart } from '@mui/icons-material';
 import {
@@ -23,12 +24,13 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function Navbar({ query, setQuery, value, setValue }) {
+function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 	const { showToast, toastMsg } = useData(query);
 	const [open, setOpen] = React.useState(false);
 	const [state, setState] = useState({
 		right: false,
 	});
+	const isMobileView = useMediaQuery('(max-width: 700px)');
 
 	const toggleDrawer = (anchor, open) => (event) => {
 		if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -44,6 +46,8 @@ function Navbar({ query, setQuery, value, setValue }) {
 		if (toastMsg !== '') {
 			setOpen(true);
 		}
+
+		setHistory([...history, value]);
 	};
 
 	const handleClose = (event, reason) => {
@@ -57,7 +61,7 @@ function Navbar({ query, setQuery, value, setValue }) {
 	const horizontal = 'bottom';
 	const vertical = 'right';
 
-	const history = (anchor) => (
+	const selectTables = (anchor) => (
 		<Box
 			sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, padding: '10px' }}
 			role="presentation"
@@ -85,12 +89,16 @@ function Navbar({ query, setQuery, value, setValue }) {
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
 				<Toolbar>
-					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0 }}>
-						<JoinFull />
-					</IconButton>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						SQL Editor
-					</Typography>
+					{!isMobileView && (
+						<>
+							<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 0 }}>
+								<JoinFull />
+							</IconButton>
+							<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+								SQL Editor
+							</Typography>
+						</>
+					)}
 					<Button onClick={onSubmit} color="inherit">
 						<PlayCircle sx={{ marginRight: '5px' }} />
 						Run Query
@@ -100,7 +108,7 @@ function Navbar({ query, setQuery, value, setValue }) {
 						Available Tables
 					</Button>
 					<Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
-						{history('right')}
+						{selectTables('right')}
 					</Drawer>
 				</Toolbar>
 			</AppBar>
