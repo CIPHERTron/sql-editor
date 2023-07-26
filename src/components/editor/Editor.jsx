@@ -1,11 +1,13 @@
 import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/src-min-noconflict/ext-language_tools';
 import 'ace-builds/src-min-noconflict/mode-mysql';
-import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/theme-monokai';
 
 import React from 'react';
 
 import AceEditor from 'react-ace';
+
+// ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.6/src-noconflict');
 
 const Editor = ({ value, setValue, isOpen }) => {
 	const onChange = (newValue) => {
@@ -19,11 +21,11 @@ const Editor = ({ value, setValue, isOpen }) => {
 					id="editor"
 					aria-label="editor"
 					mode="mysql"
-					theme="github"
+					theme="monokai"
 					name="editor"
 					fontSize={16}
-					minLines={15}
-					maxLines={10}
+					minLines={20}
+					maxLines={50}
 					width="100%"
 					showPrintMargin={false}
 					showGutter
