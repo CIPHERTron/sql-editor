@@ -12,7 +12,7 @@ const Flex = styled.div`
 	height: 100px;
 	background-color: #1876d1;
 	color: #fff;
-	margin-top: 30%;
+	margin-top: 5%%;
 `;
 
 const Branding = styled.div`

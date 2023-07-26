@@ -6,17 +6,25 @@ import CsvDownload from 'react-json-to-csv';
 import { useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from 'react-table';
 import { exportToJson } from 'utils';
 
+import styled from '@emotion/styled';
 import {
 	DownloadForOffline,
 	KeyboardArrowLeft,
 	KeyboardArrowRight,
 	KeyboardDoubleArrowLeft,
 	KeyboardDoubleArrowRight,
+	Search,
 } from '@mui/icons-material';
 import {
 	Button,
+	FormControl,
 	IconButton,
+	Input,
+	InputAdornment,
+	InputLabel,
+	MenuItem,
 	Paper,
+	Select,
 	Stack,
 	Table,
 	TableBody,
@@ -24,11 +32,18 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	Typography,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled as s } from '@mui/material/styles';
 import { tableCellClasses } from '@mui/material/TableCell';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const SearchContainer = styled.div`
+	border: 2px solid #1876d0;
+	padding: 5px;
+	border-radius: 4px;
+`;
+
+const StyledTableCell = s(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: theme.palette.common.black,
 		color: theme.palette.common.white,
@@ -38,7 +53,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	},
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = s(TableRow)(({ theme }) => ({
 	'&:nth-of-type(odd)': {
 		backgroundColor: theme.palette.action.hover,
 	},
@@ -48,7 +63,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }));
 
-const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
+const SearchRow = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
 	const count = preGlobalFilteredRows.length;
 	const [value, setValue] = useState(globalFilter);
 	const onChange = useAsyncDebounce((value) => {
@@ -56,24 +71,29 @@ const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) 
 	}, 200);
 
 	return (
-		<>
+		<SearchContainer>
 			<Helmet>
 				<title>{`SQL Editor`}</title>
 			</Helmet>
-			<label className="flex gap-x-2 items-baseline">
-				<span className="text-primary-dark hidden md:inline-block font-semibold">Search: </span>
-				<input
-					type="text"
-					className="text-primary-dark rounded-md shadow-sm outline-none border-2 border-gray-300 focus:border-primary-dark transition p-2 w-40 md:w-52 "
-					value={value || ''}
-					onChange={(e) => {
-						setValue(e.target.value);
-						onChange(e.target.value);
-					}}
-					placeholder={`${count} records...`}
-				/>
-			</label>
-		</>
+			<Stack direction="row" justifyContent="center" alignItems="center">
+				<FormControl variant="outlined">
+					<InputLabel htmlFor="input-with-icon-adornment">{`${count} records...`}</InputLabel>
+					<Input
+						id="input-with-icon-adornment"
+						onChange={(e) => {
+							setValue(e.target.value);
+							onChange(e.target.value);
+						}}
+						value={value || ''}
+						startAdornment={
+							<InputAdornment position="start">
+								<Search />
+							</InputAdornment>
+						}
+					/>
+				</FormControl>
+			</Stack>
+		</SearchContainer>
 	);
 };
 
@@ -104,10 +124,11 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 		useSortBy,
 		usePagination,
 	);
+
 	return (
 		<>
 			<Stack direction="row" justifyContent="space-between" alignItems="center">
-				<GlobalFilter
+				<SearchRow
 					preGlobalFilteredRows={preGlobalFilteredRows}
 					globalFilter={state.globalFilter}
 					setGlobalFilter={setGlobalFilter}
@@ -161,108 +182,38 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 			</TableContainer>
 
 			{/* Pagination */}
-			<div className="py-3 flex items-center justify-between">
-				<div className="flex-1 flex justify-between sm:hidden">
-					<Button onClick={() => previousPage()} disabled={!canPreviousPage}>
-						Previous
-					</Button>
-					<Button onClick={() => nextPage()} disabled={!canNextPage}>
-						Next
-					</Button>
-				</div>
-				<div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-					<div className="flex gap-x-2">
-						<span className="text-sm text-gray-700">
-							Page <span className="font-medium">{state.pageIndex + 1}</span> of{' '}
-							<span className="font-medium">{pageOptions.length}</span>
-						</span>
-						<select
-							className="text-black outline-none bg-white border-2 border-transparent focus:border-primary-dark rounded-md cursor-pointer"
+			<Stack sx={{ marginTop: '5%' }} direction="column" justifyContent="center" alignItems="center">
+				<Typography variant="subtitle1">{`Page ${state.pageIndex + 1} of ${pageOptions.length}`}</Typography>
+				<Stack direction="row" justifyContent="flex-end" alignItems="center">
+					<FormControl sx={{ m: 1, minWidth: 120 }}>
+						<InputLabel>Rows per page</InputLabel>
+						<Select
 							value={state.pageSize}
+							label="Rows per page"
 							onChange={(e) => {
 								setPageSize(Number(e.target.value));
 							}}>
-							{[5, 10].map((pageSize) => (
-								<option key={pageSize} value={pageSize}>
-									Show {pageSize}
-								</option>
-							))}
-						</select>
-					</div>
-					<div>
-						<nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-							<IconButton
-								className="rounded-l-md"
-								onClick={() => gotoPage(0)}
-								disabled={!canPreviousPage}
-								aria-label="First Page">
-								<KeyboardDoubleArrowLeft>
-									<span className="sr-only">First</span>
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-										<title id="pageOne">Go to page one</title>
-										<path
-											fillRule="evenodd"
-											d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								</KeyboardDoubleArrowLeft>
-							</IconButton>
-
-							<IconButton onClick={() => previousPage()} disabled={!canPreviousPage} aria-label="Previous">
-								<KeyboardArrowLeft>
-									<span className="sr-only">Previous</span>
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-										<title id="previousPage">Go to previous page</title>
-										<path
-											fillRule="evenodd"
-											d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								</KeyboardArrowLeft>
-							</IconButton>
-
-							<IconButton onClick={() => nextPage()} disabled={!canNextPage} aria-label="Next">
-								<KeyboardArrowRight>
-									<span className="sr-only">Next</span>
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-										<title id="nextPage">Go to next page</title>
-										<path
-											fillRule="evenodd"
-											d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								</KeyboardArrowRight>
-							</IconButton>
-
-							<IconButton
-								className="rounded-r-md"
-								onClick={() => gotoPage(pageCount - 1)}
-								disabled={!canNextPage}
-								aria-label="Last Page">
-								<KeyboardDoubleArrowRight>
-									<span className="sr-only">Last</span>
-									<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-										<title id="lastPage">Go to last page</title>
-										<path
-											fillRule="evenodd"
-											d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-											clipRule="evenodd"
-										/>
-										<path
-											fillRule="evenodd"
-											d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								</KeyboardDoubleArrowRight>
-							</IconButton>
-						</nav>
-					</div>
-				</div>
-			</div>
+							<MenuItem value={5}>5</MenuItem>
+							<MenuItem value={10}>10</MenuItem>
+							<MenuItem value={20}>20</MenuItem>
+						</Select>
+					</FormControl>
+					<Stack direction="row" justifyContent="center" alignItems="center">
+						<IconButton onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+							<KeyboardDoubleArrowLeft />
+						</IconButton>
+						<IconButton onClick={() => previousPage()} disabled={!canPreviousPage}>
+							<KeyboardArrowLeft />
+						</IconButton>
+						<IconButton onClick={() => nextPage()} disabled={!canNextPage}>
+							<KeyboardArrowRight />
+						</IconButton>
+						<IconButton onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+							<KeyboardDoubleArrowRight />
+						</IconButton>
+					</Stack>
+				</Stack>
+			</Stack>
 		</>
 	);
 };
