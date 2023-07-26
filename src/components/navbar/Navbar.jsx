@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 
 import useData from 'hooks/useData';
 
-import { JoinFull, PlayCircle, TableChart } from '@mui/icons-material';
+import { JoinFull, PlayCircle, Storage, TableChart } from '@mui/icons-material';
 import {
 	Alert as MuiAlert,
 	AppBar,
 	Box,
 	Button,
+	Chip,
 	Drawer,
 	IconButton,
 	Snackbar,
+	Stack,
 	Toolbar,
 	Typography,
 } from '@mui/material';
+
+import AVAILABLE_TABLES from '../../constants/constants';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -55,11 +59,24 @@ function Navbar({ query, setQuery, value }) {
 
 	const history = (anchor) => (
 		<Box
-			sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+			sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, padding: '10px' }}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}>
-			<Typography>History displayed here</Typography>
+			<Typography textAlign="center" variant="subtitle1" fontWeight={700}>
+				Available Tables:
+			</Typography>
+			<Stack direction="column" justifyContent="center" alignItems="center">
+				{AVAILABLE_TABLES.map((table) => (
+					<Chip
+						sx={{ margin: '10px auto', width: '200px', textAlign: 'start' }}
+						icon={<Storage />}
+						color="success"
+						key={table}
+						label={table}
+					/>
+				))}
+			</Stack>
 		</Box>
 	);
 

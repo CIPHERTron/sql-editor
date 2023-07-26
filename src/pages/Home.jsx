@@ -9,6 +9,9 @@ function Home() {
 	const [value, setValue] = useState('select * from customers');
 	const [isOpen] = useState(false);
 
+	console.log(query);
+	console.log(value);
+
 	return (
 		<div>
 			<Navbar query={query} setQuery={setQuery} value={value} />
