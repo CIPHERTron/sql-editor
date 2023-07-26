@@ -23,7 +23,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function Navbar({ query, setQuery, value }) {
+function Navbar({ query, setQuery, value, setValue }) {
 	const { showToast, toastMsg } = useData(query);
 	const [open, setOpen] = React.useState(false);
 	const [state, setState] = useState({
@@ -69,11 +69,12 @@ function Navbar({ query, setQuery, value }) {
 			<Stack direction="column" justifyContent="center" alignItems="center">
 				{AVAILABLE_TABLES.map((table) => (
 					<Chip
-						sx={{ margin: '10px auto', width: '200px', textAlign: 'start' }}
+						sx={{ margin: '10px auto', width: '200px', textAlign: 'start', cursor: 'pointer' }}
 						icon={<Storage />}
 						color="success"
 						key={table}
 						label={table}
+						onClick={() => setValue(`select * from ${table}`)}
 					/>
 				))}
 			</Stack>
