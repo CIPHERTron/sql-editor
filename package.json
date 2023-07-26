@@ -14,6 +14,8 @@
     "url": "https://github.com/CIPHERTron/sql-editor.git"
   },
   "dependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.1",
