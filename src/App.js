@@ -1,7 +1,8 @@
 import './App.css';
 
-import styled from 'styled-components';
 import tw from 'twin.macro';
+
+import styled from '@emotion/styled';
 
 import Routes from './routes';
 
