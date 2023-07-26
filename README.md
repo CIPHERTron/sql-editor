@@ -6,8 +6,6 @@
   <h2 align="center">SQL Editor [<a href="https://online-sql-editor.vercel.app/">View Live</a>]</h2> 
 </p>
 
-[View Live](https://online-sql-editor.vercel.app/)
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -58,9 +56,8 @@
 
 ### Demo Video
 
-<p align="center">
-<video src='https://res.cloudinary.com/pritish007/video/upload/v1690397624/sql-editor-demo_uul6p4.mp4' width=750/>
-</p>
+https://github.com/CIPHERTron/sql-editor/assets/56754747/b0b7fda5-878c-4e42-bf13-f76bf0a92a56
+
 
 ### 🛠️ Built With
 
