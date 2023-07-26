@@ -163,41 +163,6 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 				</Table>
 			</TableContainer>
 
-			{/* <div className="shadow overflow-auto border-b border-gray-200 sm:rounded-lg">
-				<table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
-					<thead className="bg-primary-dark">
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
-									<th
-										scope="col"
-										className="px-6 py-4 text-left text-xs font-medium text-white  uppercase tracking-wider"
-										{...column.getHeaderProps(column.getSortByToggleProps())}>
-										<span className=" hover:text-gray-300">{column.render('Header')}</span>
-										<span>{column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}</span>
-									</th>
-								))}
-							</tr>
-						))}
-					</thead>
-					<tbody {...getTableBodyProps()} className="bg-white text-black divide-y divide-gray-200">
-						{page.map((row) => {
-							prepareRow(row);
-							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
-										return (
-											<td {...cell.getCellProps()} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-												{cell.render('Cell')}
-											</td>
-										);
-									})}
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
-			</div> */}
 			{/* Pagination */}
 			<div className="py-3 flex items-center justify-between">
 				<div className="flex-1 flex justify-between sm:hidden">
