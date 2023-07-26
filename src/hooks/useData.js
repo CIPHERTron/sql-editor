@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import alasql from 'alasql';
 import AVAILABLE_TABLES from 'constants/constants';
-import toast from 'react-hot-toast';
 
 const getURL = (name) =>
 	`https://api.github.com/repos/graphql-compose/graphql-compose-examples/contents/examples/northwind/data/csv/${name}.csv`;
@@ -11,15 +10,22 @@ const useData = (tableName) => {
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(false);
 	const [runtime, setRuntime] = useState('');
+	const [showToast, setShowToast] = useState('');
+	const [toastMsg, setToastMsg] = useState('');
+
 	const convertToJson = (data) => {
 		alasql
 			.promise("SELECT * FROM CSV(?, {headers: false, separator:','})", [data])
 			.then((data) => {
 				setData(data);
-				toast.success('Query run successfully');
+				setShowToast('success');
+				setToastMsg('Query ran successfully');
+				// toast.success('Query ran successfully');
 			})
 			.catch((e) => {
-				toast.error(e.message);
+				setShowToast('error');
+				setToastMsg(e.message);
+				// toast.error(e.message);
 			});
 	};
 
@@ -43,11 +49,15 @@ const useData = (tableName) => {
 					})
 					.then((data) => convertToJson(atob(data.content.replace('\n', ''))))
 					.catch((error) => {
-						toast.error(error.message);
+						setShowToast('error');
+						setToastMsg(error.message);
+						// toast.error(error.message);
 					});
 			} else {
 				setError(true);
-				toast.error('Please enter a valid query');
+				setShowToast('error');
+				setToastMsg('Please enter a valid query');
+				// toast.error('Please enter a valid query');
 			}
 		};
 		let t0 = performance.now(); //start time
@@ -56,7 +66,7 @@ const useData = (tableName) => {
 		setRuntime(t1 - t0);
 	}, [tableName]);
 
-	return { data, runtime, error };
+	return { data, runtime, error, showToast, toastMsg };
 };
 
 export default useData;
