@@ -23,6 +23,28 @@ import {
 	TableHead,
 	TableRow,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { tableCellClasses } from '@mui/material/TableCell';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+	[`&.${tableCellClasses.head}`]: {
+		backgroundColor: theme.palette.common.black,
+		color: theme.palette.common.white,
+	},
+	[`&.${tableCellClasses.body}`]: {
+		fontSize: 14,
+	},
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+	'&:nth-of-type(odd)': {
+		backgroundColor: theme.palette.action.hover,
+	},
+	// hide last border
+	'&:last-child td, &:last-child th': {
+		border: 0,
+	},
+}));
 
 const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
 	const count = preGlobalFilteredRows.length;
@@ -136,13 +158,13 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 						{headerGroups.map((headerGroup) => (
 							<TableRow {...headerGroup.getHeaderGroupProps()}>
 								{headerGroup.headers.map((column) => (
-									<TableCell
+									<StyledTableCell
 										scope="col"
 										className="px-6 py-4 text-left text-xs font-medium text-white  uppercase tracking-wider"
 										{...column.getHeaderProps(column.getSortByToggleProps())}>
 										<span className=" hover:text-gray-300">{column.render('Header')}</span>
 										<span>{column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}</span>
-									</TableCell>
+									</StyledTableCell>
 								))}
 							</TableRow>
 						))}
@@ -152,11 +174,11 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 						{page.map((row) => {
 							prepareRow(row);
 							return (
-								<TableRow {...row.getRowProps()} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<StyledTableRow {...row.getRowProps()} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									{row.cells.map((cell) => {
-										return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>;
+										return <StyledTableCell {...cell.getCellProps()}>{cell.render('Cell')}</StyledTableCell>;
 									})}
-								</TableRow>
+								</StyledTableRow>
 							);
 						})}
 					</TableBody>
