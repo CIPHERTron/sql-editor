@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { JoinFull, TableChart } from '@mui/icons-material';
+import { JoinFull, PlayCircle, TableChart } from '@mui/icons-material';
 import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 
-function Navbar() {
+function Navbar({ setQuery, value }) {
 	const [state, setState] = useState({
 		right: false,
 	});
@@ -14,6 +14,11 @@ function Navbar() {
 		}
 
 		setState({ ...state, [anchor]: open });
+	};
+
+	const onSubmit = () => {
+		var Z = value.toLowerCase().slice(value.indexOf('from') + 'from'.length);
+		setQuery(Z.split(' ')[1]);
 	};
 
 	const history = (anchor) => (
@@ -36,6 +41,10 @@ function Navbar() {
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 						SQL Editor
 					</Typography>
+					<Button onClick={onSubmit} color="inherit">
+						<PlayCircle sx={{ marginRight: '5px' }} />
+						Run Query
+					</Button>
 					<Button onClick={toggleDrawer('right', true)} color="inherit">
 						<TableChart sx={{ marginRight: '5px' }} />
 						Available Tables
