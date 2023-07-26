@@ -127,7 +127,7 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 
 	return (
 		<>
-			<Stack direction="row" justifyContent="space-between" alignItems="center">
+			<Stack sx={{ padding: '2% 5%' }} direction="row" justifyContent="space-between" alignItems="center">
 				<SearchRow
 					preGlobalFilteredRows={preGlobalFilteredRows}
 					globalFilter={state.globalFilter}
@@ -182,7 +182,11 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 			</TableContainer>
 
 			{/* Pagination */}
-			<Stack sx={{ marginTop: '5%' }} direction="column" justifyContent="center" alignItems="center">
+			<Stack
+				sx={{ marginTop: '5%', marginBottom: '5%' }}
+				direction="column"
+				justifyContent="center"
+				alignItems="center">
 				<Typography variant="subtitle1">{`Page ${state.pageIndex + 1} of ${pageOptions.length}`}</Typography>
 				<Stack direction="row" justifyContent="flex-end" alignItems="center">
 					<FormControl sx={{ m: 1, minWidth: 120 }}>
