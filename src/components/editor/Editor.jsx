@@ -30,7 +30,7 @@ const Editor = ({ value, setValue, isOpen, history }) => {
 
 	return (
 		<HeroContainer>
-			<Container sx={{ background: '#272822' }}>
+			<Container sx={{ background: '#272822', maxHeight: '440px', overflow: 'scroll' }}>
 				<List
 					sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
 					component="nav"
