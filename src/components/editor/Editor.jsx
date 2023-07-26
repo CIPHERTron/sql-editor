@@ -7,16 +7,9 @@ import React from 'react';
 
 import AceEditor from 'react-ace';
 
-import { Button } from '@mui/material';
-
-const Editor = ({ setQuery, value, setValue, isOpen }) => {
+const Editor = ({ value, setValue, isOpen }) => {
 	const onChange = (newValue) => {
 		setValue(newValue);
-	};
-
-	const onSubmit = () => {
-		var Z = value.toLowerCase().slice(value.indexOf('from') + 'from'.length);
-		setQuery(Z.split(' ')[1]);
 	};
 
 	return (
@@ -46,23 +39,6 @@ const Editor = ({ setQuery, value, setValue, isOpen }) => {
 					showLineNumbers
 				/>
 			</label>
-			<div>
-				<Button variant="contained" onClick={onSubmit}>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-6 inline mr-2"
-						viewBox="0 0 20 20"
-						fill="currentColor">
-						<title id="run">run query</title>
-						<path
-							fillRule="evenodd"
-							d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-							clipRule="evenodd"
-						/>
-					</svg>{' '}
-					Run Query
-				</Button>
-			</div>
 		</main>
 	);
 };

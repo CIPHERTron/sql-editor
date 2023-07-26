@@ -12,7 +12,7 @@ function Home() {
 
 	return (
 		<div>
-			<Navbar />
+			<Navbar setQuery={setQuery} value={value} />
 			<Toaster
 				position="top-center"
 				gutter={8}
@@ -42,7 +42,7 @@ function Home() {
 			/>
 			<div className="grid grid-cols-layout-desktop grid-rows-layout-desktop min-h-screen">
 				<Suspense fallback={<Loader />}>
-					<Editor setQuery={setQuery} value={value} setValue={setValue} isOpen={isOpen} />
+					<Editor value={value} setValue={setValue} isOpen={isOpen} />
 					{query ? <TableContainer query={query} isOpen={isOpen} /> : null}
 				</Suspense>
 			</div>
