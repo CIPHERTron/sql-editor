@@ -7,6 +7,7 @@ import { useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable }
 import { exportToJson } from 'utils';
 
 import {
+	DownloadForOffline,
 	KeyboardArrowLeft,
 	KeyboardArrowRight,
 	KeyboardDoubleArrowLeft,
@@ -16,6 +17,7 @@ import {
 	Button,
 	IconButton,
 	Paper,
+	Stack,
 	Table,
 	TableBody,
 	TableCell,
@@ -104,52 +106,25 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 	);
 	return (
 		<>
-			<div className="flex justify-between items-center">
+			<Stack direction="row" justifyContent="space-between" alignItems="center">
 				<GlobalFilter
 					preGlobalFilteredRows={preGlobalFilteredRows}
 					globalFilter={state.globalFilter}
 					setGlobalFilter={setGlobalFilter}
 				/>
-				<div>
-					<CsvDownload
-						className="bg-primary-dark hover:bg-secondary-dark transition-colors text-white rounded-md font-semibold px-4 py-2 mr-3 shadow-lg"
-						data={completeData}
-						filename={`${query}.csv`}>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-6 w-6 mr-2 inline"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor">
-							<title id="download">Download CSV</title>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-							/>
-						</svg>{' '}
-						CSV
+				<Stack direction="row" justifyContent="space-between" alignItems="center">
+					<CsvDownload data={completeData} filename={`${query}.csv`}>
+						<Button color="inherit" variant="contained">
+							<DownloadForOffline sx={{ marginRight: '5px' }} />
+							CSV
+						</Button>
 					</CsvDownload>
-					<Button onClick={() => exportToJson(completeData, query)}>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-6 w-6 mr-2 inline"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor">
-							<title id="download">Download JSON</title>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-							/>
-						</svg>
+					<Button onClick={() => exportToJson(completeData, query)} variant="contained" color="inherit">
+						<DownloadForOffline sx={{ marginRight: '5px' }} />
 						JSON
 					</Button>
-				</div>
-			</div>
+				</Stack>
+			</Stack>
 
 			{/* table */}
 			<TableContainer component={Paper}>

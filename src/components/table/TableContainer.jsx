@@ -39,13 +39,8 @@ const TableContainer = React.memo(({ query, isOpen }) => {
 	const queryData = useMemo(() => data.slice(1), [data]);
 	if (error)
 		return (
-			<section className={`${isOpen ? 'col-start-2' : 'col-start-1'} col-end-3 row-start-3 row-end-4 text-white m-6`}>
-				<h1 className="text-center font-bold text-xl text-primary-dark">
-					Something Went Wrong{' '}
-					<span role="img" aria-label="sad face">
-						😔
-					</span>
-				</h1>
+			<section>
+				<h1>Something Went Wrong</h1>
 			</section>
 		);
 	return (
