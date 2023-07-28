@@ -8,7 +8,7 @@ const AVAILABLE_TABLES = [
 	'products',
 	'regions',
 	'shippers',
-	'supplies',
+	'suppliers',
 	'territories',
 ];
 
