@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import alasql from 'alasql';
-import AVAILABLE_TABLES from 'constants/constants';
+import { AVAILABLE_TABLES } from 'constants/constants';
 
 const getURL = (name) =>
 	`https://api.github.com/repos/graphql-compose/graphql-compose-examples/contents/examples/northwind/data/csv/${name}.csv`;

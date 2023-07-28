@@ -9,8 +9,6 @@ function Home() {
 	const [value, setValue] = useState('select * from customers');
 	const [history, setHistory] = useState([]);
 
-	console.log(history);
-
 	return (
 		<div>
 			<Navbar

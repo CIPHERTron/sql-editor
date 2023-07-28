@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 
 import useData from 'hooks/useData';
@@ -7,22 +8,34 @@ import { JoinFull, PlayCircle, Storage, TableChart } from '@mui/icons-material';
 import {
 	Alert as MuiAlert,
 	AppBar,
+	Backdrop,
 	Box,
 	Button,
 	Chip,
 	Drawer,
+	Grid,
 	IconButton,
+	Paper,
 	Snackbar,
 	Stack,
 	Toolbar,
 	Typography,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-import AVAILABLE_TABLES from '../../constants/constants';
+import { AVAILABLE_TABLES, TABLE_FIELDS } from '../../constants/constants';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+const Item = styled(Paper)(({ theme }) => ({
+	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+	...theme.typography.body2,
+	padding: theme.spacing(1),
+	textAlign: 'center',
+	color: theme.palette.text.secondary,
+}));
 
 function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 	const { showToast, toastMsg } = useData(query);
@@ -30,6 +43,8 @@ function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 	const [state, setState] = useState({
 		right: false,
 	});
+	const [backdropToggle, setBackdropToggle] = useState(false);
+	const [selectedTable, setSelectedTable] = useState('categories');
 	const isMobileView = useMediaQuery('(max-width: 700px)');
 
 	const toggleDrawer = (anchor, open) => (event) => {
@@ -72,14 +87,19 @@ function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 			</Typography>
 			<Stack direction="column" justifyContent="center" alignItems="center">
 				{AVAILABLE_TABLES.map((table) => (
-					<Chip
-						sx={{ margin: '10px auto', width: '200px', textAlign: 'start', cursor: 'pointer' }}
-						icon={<Storage />}
-						color="success"
-						key={table}
-						label={table}
-						onClick={() => setValue(`select * from ${table}`)}
-					/>
+					<>
+						<Chip
+							sx={{ margin: '10px auto', width: '200px', textAlign: 'start', cursor: 'pointer' }}
+							icon={<Storage />}
+							color="success"
+							key={table}
+							label={table}
+							onClick={() => {
+								setSelectedTable(table);
+								setBackdropToggle(true);
+							}}
+						/>
+					</>
 				))}
 			</Stack>
 		</Box>
@@ -107,6 +127,25 @@ function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 						<TableChart sx={{ marginRight: '5px' }} />
 						Available Tables
 					</Button>
+
+					{/* Display table fields */}
+					<Backdrop
+						sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+						open={backdropToggle}
+						onClick={() => setBackdropToggle(false)}>
+						<Box sx={{ width: '70%' }}>
+							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 3, md: 3 }}>
+								{TABLE_FIELDS[`${selectedTable}`].map((field) => (
+									<Grid key={field} item xs={6} sm={6} md={4} lg={3}>
+										<Item sx={{ cursor: 'pointer' }} onClick={() => setValue(`select ${field} from ${selectedTable}`)}>
+											{field}
+										</Item>
+									</Grid>
+								))}
+							</Grid>
+						</Box>
+					</Backdrop>
+
 					<Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
 						{selectTables('right')}
 					</Drawer>
