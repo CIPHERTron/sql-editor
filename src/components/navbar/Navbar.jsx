@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 
 import useData from 'hooks/useData';
@@ -134,6 +133,9 @@ function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 						open={backdropToggle}
 						onClick={() => setBackdropToggle(false)}>
 						<Box sx={{ width: '70%' }}>
+							<Typography
+								sx={{ marginBottom: '2%' }}
+								variant="subtitle1">{`Here are the set of available fields in "${selectedTable}" table:`}</Typography>
 							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 3, md: 3 }}>
 								{TABLE_FIELDS[`${selectedTable}`].map((field) => (
 									<Grid key={field} item xs={6} sm={6} md={4} lg={3}>

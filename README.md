@@ -58,7 +58,6 @@
 
 https://github.com/CIPHERTron/sql-editor/assets/56754747/b0b7fda5-878c-4e42-bf13-f76bf0a92a56
 
-
 ### 🛠️ Built With
 
 Following technologies and libraries are used for the development of this
@@ -153,3 +152,6 @@ yarn start
 
 3. _Image showing the side bar where all the available tables are listed_
    <img src="./images/ss-available-tables.png" alt="Image showing the side bar where all the available tables are listed" />
+
+4. _Image showing the backdrop where all the available fields of the selected table are listed_
+   <img src="./images/ss-available-fields.png" alt="Image showing the backdrop where all the available fields of the selected table are listed" />
