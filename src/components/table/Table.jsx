@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React, { useState } from 'react';
 
-import { Helmet } from 'react-helmet';
 import CsvDownload from 'react-json-to-csv';
 import { useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from 'react-table';
 import { exportToJson } from 'utils';
@@ -72,9 +71,6 @@ const SearchRow = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => 
 
 	return (
 		<SearchContainer>
-			<Helmet>
-				<title>{`SQL Editor`}</title>
-			</Helmet>
 			<Stack direction="row" justifyContent="center" alignItems="center">
 				<FormControl variant="outlined">
 					<InputLabel htmlFor="input-with-icon-adornment">{`${count} records...`}</InputLabel>
@@ -147,19 +143,14 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 				</Stack>
 			</Stack>
 
-			{/* table */}
 			<TableContainer component={Paper}>
 				<Table {...getTableProps()} sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						{headerGroups.map((headerGroup) => (
 							<TableRow {...headerGroup.getHeaderGroupProps()}>
 								{headerGroup.headers.map((column) => (
-									<StyledTableCell
-										scope="col"
-										className="px-6 py-4 text-left text-xs font-medium text-white  uppercase tracking-wider"
-										{...column.getHeaderProps(column.getSortByToggleProps())}>
-										<span className=" hover:text-gray-300">{column.render('Header')}</span>
-										<span>{column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}</span>
+									<StyledTableCell>
+										<Typography variant="body2">{column.render('Header')}</Typography>
 									</StyledTableCell>
 								))}
 							</TableRow>
@@ -181,7 +172,6 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 				</Table>
 			</TableContainer>
 
-			{/* Pagination */}
 			<Stack
 				sx={{ marginTop: '5%', marginBottom: '5%' }}
 				direction="column"

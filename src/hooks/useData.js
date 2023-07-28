@@ -9,7 +9,7 @@ const getURL = (name) =>
 const useData = (tableName) => {
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(false);
-	const [runtime, setRuntime] = useState('');
+	const [queryExecTime, setQueryExecTime] = useState('');
 	const [showToast, setShowToast] = useState('');
 	const [toastMsg, setToastMsg] = useState('');
 
@@ -56,13 +56,13 @@ const useData = (tableName) => {
 				setToastMsg('Please enter a valid query');
 			}
 		};
-		let t0 = performance.now(); //start time
+		let startTime = performance.now();
 		fetchData(tableName);
-		let t1 = performance.now(); //end time
-		setRuntime(t1 - t0);
+		let endTime = performance.now();
+		setQueryExecTime(startTime - endTime);
 	}, [tableName]);
 
-	return { data, runtime, error, showToast, toastMsg };
+	return { data, queryExecTime, error, showToast, toastMsg };
 };
 
 export default useData;
