@@ -8,7 +8,6 @@ function Home() {
 	const [query, setQuery] = useState('');
 	const [value, setValue] = useState('select * from customers');
 	const [history, setHistory] = useState([]);
-	const [isOpen] = useState(false);
 
 	console.log(history);
 
@@ -22,13 +21,12 @@ function Home() {
 				history={history}
 				setHistory={setHistory}
 			/>
-			<div className="grid grid-cols-layout-desktop grid-rows-layout-desktop min-h-screen">
+			<div>
 				<Suspense fallback={<Loader />}>
-					<Editor value={value} setValue={setValue} isOpen={isOpen} history={history} />
-					{query ? <TableContainer query={query} isOpen={isOpen} /> : null}
+					<Editor value={value} setValue={setValue} history={history} />
+					{query ? <TableContainer query={query} /> : null}
 				</Suspense>
 			</div>
-			{/* <Footer /> */}
 		</div>
 	);
 }

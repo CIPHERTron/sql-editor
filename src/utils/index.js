@@ -20,7 +20,3 @@ export const exportToJson = (data, query) => {
 		fileType: 'text/json',
 	});
 };
-
-export function classNames(...classes) {
-	return classes.filter(Boolean).join(' ');
-}

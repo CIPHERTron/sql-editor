@@ -23,7 +23,7 @@ const HeroContainer = styled.div`
 	}
 `;
 
-const Editor = ({ value, setValue, isOpen, history }) => {
+const Editor = ({ value, setValue, history }) => {
 	const onChange = (newValue) => {
 		setValue(newValue);
 	};
@@ -56,7 +56,7 @@ const Editor = ({ value, setValue, isOpen, history }) => {
 						))}
 				</List>
 			</Container>
-			<main className={`${isOpen ? 'col-start-2' : 'col-start-1'} col-end-3 row-start-2 row-end-3 mx-6 my-12 lg:mx-12`}>
+			<div>
 				<label htmlFor="editor">
 					<AceEditor
 						id="editor"
@@ -83,7 +83,7 @@ const Editor = ({ value, setValue, isOpen, history }) => {
 						showLineNumbers
 					/>
 				</label>
-			</main>
+			</div>
 		</HeroContainer>
 	);
 };
