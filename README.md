@@ -56,7 +56,8 @@
 
 ### Demo Video
 
-https://github.com/CIPHERTron/sql-editor/assets/56754747/b0b7fda5-878c-4e42-bf13-f76bf0a92a56
+https://github.com/CIPHERTron/sql-editor/assets/56754747/fd97e523-289f-40f4-aa0a-bd6482151082
+
 
 ### 🛠️ Built With
 
