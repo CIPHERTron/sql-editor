@@ -58,7 +58,6 @@
 
 https://github.com/CIPHERTron/sql-editor/assets/56754747/fd97e523-289f-40f4-aa0a-bd6482151082
 
-
 ### 🛠️ Built With
 
 Following technologies and libraries are used for the development of this
@@ -137,11 +136,21 @@ yarn start
 
 ## Performance
 
-(The forformance of the website was audited using [pagespeed.web.dev](https://pagespeed.web.dev/))
+(The forformance of the website was audited using [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-online-sql-editor-vercel-app/8clvvui2am?form_factor=desktop))
 
 <p align="center">
-<img src="./images/performance.png">
+<img style="width: 70%; height: auto;" src="./images/performance.png">
 </p>
+
+<p align="center">
+<img style="width: 70%; height: auto;" src="./images/performance-details.png">
+</p>
+
+- **First Contentful Paint**: `0.5s`
+- **Largest Contentful Paint**: `1.0s`
+- **Speed Index**: `1.2s`
+- **Total Blocking Time**: `70ms`
+- **Cumulative Layout Shift**: `0`
 
 ### 📉 Relevant Screenshots:
 
