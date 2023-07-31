@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/CIPHERTron/sql-editor/">
-    <img style="width: 750px; height: auto;" src="./images/sql-editor.png">
+    <img style="width: 750px; height: auto;" src="https://res.cloudinary.com/pritish007/image/upload/v1690793299/Personal%20Portfolio/Projects/sql-editor.png">
   </a>
 
   <h2 align="center">SQL Editor [<a href="https://online-sql-editor.vercel.app/">View Live</a>]</h2> 
