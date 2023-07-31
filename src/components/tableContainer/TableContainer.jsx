@@ -5,7 +5,9 @@ import { Table } from 'components';
 import useData from 'hooks/useData';
 
 import styled from '@emotion/styled';
-import { Box, LinearProgress, Typography } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 const QueryTime = styled.div`
 	display: flex;
@@ -56,9 +58,14 @@ const TableContainer = React.memo(({ query }) => {
 					<Table columns={columns} completeData={data} data={queryData} query={query} />
 				</>
 			) : (
-				<Box sx={{ width: '100%' }}>
-					<LinearProgress />
-				</Box>
+				<Stack direction="column" justifyContent={'center'} alignItems={'center'} sx={{ width: '100%', mt: 3 }}>
+					<Skeleton width="70%" />
+					<Skeleton width="70%" animation="wave" />
+					<Skeleton width="70%" />
+					<Skeleton width="70%" animation="wave" />
+					<Skeleton width="70%" />
+					<Skeleton width="70%" animation={false} />
+				</Stack>
 			)}
 		</>
 	);
