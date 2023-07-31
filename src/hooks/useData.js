@@ -9,7 +9,7 @@ const getURL = (name) =>
 const useData = (tableName) => {
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(false);
-	const [queryExecTime, setQueryExecTime] = useState('');
+	const [queryExecTime, setQueryExecTime] = useState();
 	const [showToast, setShowToast] = useState('');
 	const [toastMsg, setToastMsg] = useState('');
 
@@ -30,7 +30,7 @@ const useData = (tableName) => {
 	useEffect(() => {
 		const fetchData = (tableName) => {
 			setData([]);
-			const name = AVAILABLE_TABLES.find((name) => name === tableName);
+			const name = AVAILABLE_TABLES.find((currName) => currName === tableName);
 			if (name) {
 				setError(false);
 				fetch(getURL(tableName), {
@@ -59,7 +59,7 @@ const useData = (tableName) => {
 		let startTime = performance.now();
 		fetchData(tableName);
 		let endTime = performance.now();
-		setQueryExecTime(startTime - endTime);
+		setQueryExecTime(endTime - startTime);
 	}, [tableName]);
 
 	return { data, queryExecTime, error, showToast, toastMsg };
