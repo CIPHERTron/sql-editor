@@ -36,7 +36,14 @@ const Editor = ({ value, setValue, history }) => {
 
 	return (
 		<HeroContainer>
-			<Container sx={{ background: '#272822', maxHeight: '440px', overflow: 'scroll' }}>
+			<Container
+				sx={{
+					background: '#272822',
+					maxHeight: '440px',
+					overflowY: 'scroll',
+					overflowX: 'hidden',
+					'&::-webkit-scrollbar': { display: 'none' },
+				}}>
 				<List
 					sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
 					component="nav"
