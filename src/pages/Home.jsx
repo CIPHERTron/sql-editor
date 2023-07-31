@@ -1,8 +1,8 @@
 import React, { Suspense, useState } from 'react';
 
-import { Editor, Navbar, TableContainer } from 'components';
+import { Editor, Navbar, Placeholder, TableContainer } from 'components';
 
-import { LinearProgress as Loader } from '@mui/material';
+import Loader from '@mui/material/LinearProgress';
 
 function Home() {
 	const [query, setQuery] = useState('');
@@ -22,7 +22,7 @@ function Home() {
 			<div>
 				<Suspense fallback={<Loader />}>
 					<Editor value={value} setValue={setValue} history={history} />
-					{query ? <TableContainer query={query} /> : null}
+					{query ? <TableContainer query={query} /> : <Placeholder />}
 				</Suspense>
 			</div>
 		</div>
