@@ -3,24 +3,25 @@ import React, { useState } from 'react';
 import useData from 'hooks/useData';
 import useMediaQuery from 'hooks/useMediaQuery';
 
-import { JoinFull, PlayCircle, Storage, TableChart } from '@mui/icons-material';
-import {
-	Alert as MuiAlert,
-	AppBar,
-	Backdrop,
-	Box,
-	Button,
-	Chip,
-	Drawer,
-	Grid,
-	IconButton,
-	Paper,
-	Snackbar,
-	Stack,
-	Toolbar,
-	Typography,
-} from '@mui/material';
+import JoinFull from '@mui/icons-material/JoinFull';
+import PlayCircle from '@mui/icons-material/PlayCircle';
+import Storage from '@mui/icons-material/Storage';
+import TableChart from '@mui/icons-material/TableChart';
+import { Typography } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
+import AppBar from '@mui/material/AppBar';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import Drawer from '@mui/material/Drawer';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
 
 import { AVAILABLE_TABLES, TABLE_FIELDS } from '../../constants/constants';
 

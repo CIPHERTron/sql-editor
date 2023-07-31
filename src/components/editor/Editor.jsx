@@ -9,7 +9,13 @@ import AceEditor from 'react-ace';
 
 import styled from '@emotion/styled';
 import DataObjectIcon from '@mui/icons-material/DataObject';
-import { Container, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from '@mui/material';
+import Container from '@mui/material/Container';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import Typography from '@mui/material/Typography';
 
 // ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.6/src-noconflict');
 
