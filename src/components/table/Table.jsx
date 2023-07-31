@@ -127,13 +127,13 @@ const TableComponent = ({ columns, data, completeData, query }) => {
 					setGlobalFilter={setGlobalFilter}
 				/>
 				<Stack direction="row" justifyContent="space-between" alignItems="center">
-					<CsvDownload data={completeData} filename={`${query}.csv`}>
-						<Button color="inherit" variant="contained">
+					<CsvDownload style={{ border: 'none', padding: 0 }} data={completeData} filename={`${query}.csv`}>
+						<Button sx={{ border: 'none' }} variant="contained" color="primary">
 							<DownloadForOffline sx={{ marginRight: '5px' }} />
 							CSV
 						</Button>
 					</CsvDownload>
-					<Button onClick={() => exportToJson(completeData, query)} variant="contained" color="inherit">
+					<Button sx={{ ml: 2 }} onClick={() => exportToJson(completeData, query)} variant="contained" color="inherit">
 						<DownloadForOffline sx={{ marginRight: '5px' }} />
 						JSON
 					</Button>
